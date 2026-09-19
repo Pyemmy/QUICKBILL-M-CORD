@@ -1,0 +1,7 @@
+{
+  "name": "QUICKBILL",
+  "description": "AI-powered invoicing and trust platform for Nigerian merchants, freelancers, and SMEs with CAC verification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
