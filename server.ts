@@ -9,7 +9,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 // Enable JSON body parser with generous limit for CAC certificates and logos
 app.use(express.json({ limit: '10mb' }));
