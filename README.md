@@ -69,7 +69,7 @@ Fill in `.env`:
 ```env
 GEMINI_API_KEY=your_gemini_api_key
 APP_URL=http://localhost:5173
-ADMIN_EMAILS=your_admin_email@example.com
+ADMIN_EMAILS=team.mcord.com
 DATA_DIR=data
 PARSER_SERVICE_URL=
 ```
