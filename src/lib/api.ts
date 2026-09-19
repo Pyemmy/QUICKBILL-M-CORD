@@ -8,6 +8,11 @@ import {
 } from '../types';
 
 const TOKEN_KEY = 'quickbill_token';
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+
+function apiUrl(endpoint: string): string {
+  return `${API_BASE_URL}${endpoint}`;
+}
 
 export function getStoredToken(): string | null {
   return localStorage.getItem(TOKEN_KEY);
@@ -32,7 +37,7 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const res = await fetch(endpoint, {
+  const res = await fetch(apiUrl(endpoint), {
     ...options,
     headers,
   });
@@ -146,7 +151,7 @@ export const api = {
 
   // Public Invoice (Unauthenticated)
   async getPublicInvoice(publicId: string): Promise<PublicInvoiceData> {
-    const res = await fetch(`/api/public/invoices/${publicId}`);
+    const res = await fetch(apiUrl(`/api/public/invoices/${publicId}`));
     if (!res.ok) {
       let errorMsg = 'Invoice not found';
       try {

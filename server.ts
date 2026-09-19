@@ -11,6 +11,20 @@ dotenv.config();
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 
+// Allow a separately hosted frontend to call this API.
+const frontendUrl = process.env.FRONTEND_URL?.replace(/\/$/, '');
+if (frontendUrl) {
+  app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', frontendUrl);
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+    if (req.method === 'OPTIONS') {
+      return res.sendStatus(204);
+    }
+    next();
+  });
+}
+
 // Enable JSON body parser with generous limit for CAC certificates and logos
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
