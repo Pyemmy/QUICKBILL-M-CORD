@@ -8,7 +8,8 @@ import {
 } from '../types';
 
 const TOKEN_KEY = 'quickbill_token';
-const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+const configuredApiUrl = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? 'https://quickbill-m-cord.onrender.com' : '');
+const API_BASE_URL = configuredApiUrl.replace(/\/$/, '');
 
 function apiUrl(endpoint: string): string {
   return `${API_BASE_URL}${endpoint}`;
