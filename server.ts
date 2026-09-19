@@ -20,8 +20,8 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', service: 'QUICKBILL' });
 });
 
-// Set up persistent data directory
-const DATA_DIR = path.join(process.cwd(), 'data');
+// Set DATA_DIR to a mounted persistent volume in production.
+const DATA_DIR = process.env.DATA_DIR || path.join(process.cwd(), 'data');
 const DB_FILE = path.join(DATA_DIR, 'db.json');
 
 if (!fs.existsSync(DATA_DIR)) {
